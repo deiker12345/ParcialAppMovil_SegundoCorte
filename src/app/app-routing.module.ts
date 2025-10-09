@@ -32,6 +32,10 @@ const routes: Routes = [
   {
     path: '**',
     redirectTo: 'login'
+  },
+  {
+    path: 'welcome',
+    loadChildren: () => import('./features/welcome/welcome.module').then( m => m.WelcomePageModule)
   }
 ];
 
