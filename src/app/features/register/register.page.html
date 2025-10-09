@@ -1,13 +1,93 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>register</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registro</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">register</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <div class="register-wrapper">
+    <div class="header-logo">
+      <ion-icon name="heart" color="danger"></ion-icon>
+      <h1>Crear Cuenta</h1>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onRegister()">
+      <ion-item>
+        <ion-input label="Nombre" labelPlacement="floating" formControlName="name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Apellido" labelPlacement="floating" formControlName="lastName"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Email" type="email" labelPlacement="floating" formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Contraseña" [type]="showPass ? 'text' : 'password'" labelPlacement="floating" formControlName="password"></ion-input>
+        <ion-button fill="clear" slot="end" (click)="showPass = !showPass">
+          <ion-icon [name]="showPass ? 'eye-off' : 'eye'" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Confirmar Contraseña" [type]="showConfirm ? 'text' : 'password'" labelPlacement="floating" formControlName="confirmPassword"></ion-input>
+        <ion-button fill="clear" slot="end" (click)="showConfirm = !showConfirm">
+          <ion-icon [name]="showConfirm ? 'eye-off' : 'eye'" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-item button id="date-picker">
+        <ion-label>Fecha de Nacimiento</ion-label>
+        <ion-note slot="end">{{ form.value.birthDate | date:'dd/MM/yyyy' }}</ion-note>
+      </ion-item>
+      <ion-modal trigger="date-picker">
+        <ng-template>
+          <ion-datetime formControlName="birthDate" presentation="date" [max]="maxDate" [min]="minDate"></ion-datetime>
+        </ng-template>
+      </ion-modal>
+
+      <ion-item>
+        <ion-input label="País" labelPlacement="floating" formControlName="country"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Ciudad" labelPlacement="floating" formControlName="city"></ion-input>
+      </ion-item>
+
+      <ion-list>
+        <ion-radio-group formControlName="gender">
+          <ion-list-header>
+            <ion-label>Género</ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-radio value="male">Hombre</ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-radio value="female">Mujer</ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-radio value="other">Otro</ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-item lines="none">
+        <ion-checkbox formControlName="showGenderProfile">Mostrar género en perfil</ion-checkbox>
+      </ion-item>
+
+      <ion-button expand="block" type="submit" [disabled]="form.invalid || loading" class="submit-btn">
+        <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+        <span *ngIf="!loading">Registrarse</span>
+      </ion-button>
+
+      <div class="login-link">
+        <ion-text>¿Ya tienes cuenta? <a routerLink="/login">Inicia Sesión</a></ion-text>
+      </div>
+    </form>
+  </div>
 </ion-content>

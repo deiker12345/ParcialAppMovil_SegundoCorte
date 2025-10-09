@@ -1,0 +1,177 @@
+// login.page.scss
+
+// 🎨 Variables de color - Tema Masculino
+$primary-color: #1a73e8;
+$secondary-color: #34a853;
+$background-gradient: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+$accent-color: #00d4ff;
+$text-color: #333;
+$input-bg: rgba(255, 255, 255, 0.95);
+$shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+// 🌟 Contenedor principal
+.login-content {
+  --background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --padding-top: 40px;
+  --padding-bottom: 20px;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+// 🎭 Contenedor de bienvenida
+.welcome-container {
+  text-align: center;
+  margin-bottom: 48px;
+  animation: fadeInDown 0.8s ease-out;
+
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    letter-spacing: -0.5px;
+  }
+}
+
+// 📝 Campos de entrada
+ion-item {
+  --background: rgba(255, 255, 255, 0.95);
+  --border-radius: 12px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --inner-padding-end: 0;
+  --highlight-background: transparent;
+  
+  margin-bottom: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 6px 20px rgba(0, 212, 255, 0.2);
+    transform: translateY(-2px);
+  }
+
+  ion-label {
+    --color: #2c5364 !important;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  ion-input {
+    --color: #333;
+    --placeholder-color: #999;
+    font-size: 16px;
+  }
+}
+
+// 🔘 Botones
+ion-button {
+  --border-radius: 12px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  margin-top: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  text-transform: none;
+  transition: all 0.3s ease;
+
+  &[expand="block"] {
+    margin-bottom: 12px;
+  }
+
+  // Botón principal
+  &:not([fill="clear"]) {
+    --background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+    --box-shadow: 0 4px 16px rgba(0, 212, 255, 0.4);
+    --color: #000000;
+    
+    &:hover {
+      --box-shadow: 0 6px 20px rgba(0, 212, 255, 0.6);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  // Botón secundario
+  &[fill="clear"] {
+    --color: #00d4ff;
+    --background-hover: rgba(0, 212, 255, 0.1);
+    font-weight: 500;
+    
+    &:hover {
+      --background: rgba(0, 212, 255, 0.15);
+    }
+  }
+}
+
+// ✨ Animaciones
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// 📱 Responsive
+@media (min-width: 768px) {
+  .login-content {
+    --padding-start: 0;
+    --padding-end: 0;
+
+    ion-item,
+    ion-button {
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .welcome-container h1 {
+      font-size: 40px;
+    }
+  }
+}
+
+// 🌐 Soporte para modo oscuro
+@media (prefers-color-scheme: dark) {
+  ion-item {
+    --background: rgba(255, 255, 255, 0.1);
+    
+    ion-label {
+      --color: #00d4ff !important;
+    }
+
+    ion-input {
+      --color: #ffffff;
+      --placeholder-color: #cccccc;
+    }
+  }
+}
+
+// 🎯 Header personalizado
+ion-header {
+  ion-toolbar {
+    --background: transparent;
+    --border-width: 0;
+    
+    ion-title {
+      color: #ffffff;
+      font-weight: 600;
+    }
+  }
+}
