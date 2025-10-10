@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './shared/Guard/auth.guard';
 import { GuestGuard } from './shared/Guard/Guest.Guard';
+import { ProfileGuard } from './shared/Guard/profile.guard';
 
 const routes: Routes = [
   {
@@ -27,7 +28,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./features/home/home.module').then(m => m.HomePageModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, ProfileGuard]
   },
   {
     path: 'profile',
@@ -37,12 +38,12 @@ const routes: Routes = [
   {
     path: 'chat',
     loadChildren: () => import('./features/chat/chat.module').then(m => m.ChatPageModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, ProfileGuard]
   },
   {
     path: 'chat-conversation/:chatId',
     loadChildren: () => import('./features/chat-conversation/chat-conversation.module').then(m => m.ChatConversationPageModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, ProfileGuard]
   },
   {
     path: '**',

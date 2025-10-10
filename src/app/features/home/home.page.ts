@@ -46,12 +46,24 @@ export class HomePage implements OnInit {
 
   private async loadProfiles(): Promise<void> {
     try {
+      // Asegurar que tenemos el ID del usuario actual antes de cargar perfiles
+      if (!this.currentUserId) {
+        await this.loadCurrentUser();
+      }
+      
       const users = await this.userService.getAllUsers(this.currentUserId || undefined);
-      this.profiles = users.map(user => ({
-        ...user,
-        photos: user.photos || [],
-        passions: user.passions || []
-      }));
+      
+      // Filtro adicional para asegurar que no se incluya el usuario actual
+      this.profiles = users
+        .filter(user => user.uid !== this.currentUserId)
+        .map(user => ({
+          ...user,
+          photos: user.photos || [],
+          passions: user.passions || []
+        }));
+        
+      console.log('Perfiles cargados:', this.profiles.length);
+      console.log('Usuario actual excluido:', this.currentUserId);
     } catch (error) {
       console.error('Error cargando perfiles:', error);
     }
@@ -174,5 +186,14 @@ export class HomePage implements OnInit {
 
   goToProfile(): void {
     this.router.navigate(['/profile']);
+  }
+
+  async logout(): Promise<void> {
+    try {
+      await this.authService.logout();
+      this.router.navigate(['/welcome']);
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+    }
   }
 }
