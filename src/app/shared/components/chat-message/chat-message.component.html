@@ -1,3 +1,6 @@
-<p>
-  chat-message works!
-</p>
+<div [class]="isOwnMessage ? 'message-wrapper own-message' : 'message-wrapper other-message'">
+  <div class="message-content">
+    <p>{{ message.text }}</p>
+    <span class="timestamp">{{ message.timestamp | date:'shortTime' }}</span>
+  </div>
+</div>

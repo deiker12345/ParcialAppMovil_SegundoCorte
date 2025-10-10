@@ -1,3 +1,43 @@
-<p>
-  swipe-card works!
-</p>
+<div class="swipe-card" #card [class.active]="isActive">
+  <div class="card-content">
+    <!-- User Photo -->
+    <div class="photo-container">
+      <img 
+        [src]="user.photos?.[0] || 'assets/icon/default-avatar.png'" 
+        [alt]="user.name + ' photo'"
+        class="user-photo">
+      
+      <!-- Swipe Indicators -->
+      <div class="like-indicator">
+        <ion-icon name="heart" class="like-icon"></ion-icon>
+        <span class="like-text">LIKE</span>
+      </div>
+      
+      <div class="dislike-indicator">
+        <ion-icon name="close" class="dislike-icon"></ion-icon>
+        <span class="dislike-text">NOPE</span>
+      </div>
+    </div>
+
+    <!-- User Info -->
+    <div class="user-info">
+      <div class="user-header">
+        <h2 class="user-name">{{ user.name }}, {{ getAge(user.birthDate) }}</h2>
+        <div class="location" *ngIf="user.city && user.country">
+          <ion-icon name="location-outline" class="location-icon"></ion-icon>
+          <span>{{ user.city }}, {{ user.country }}</span>
+        </div>
+      </div>
+
+      <!-- Passions/Interests -->
+      <div class="passions-container" *ngIf="user.passions && user.passions.length > 0">
+        <div class="passion-tag" *ngFor="let passion of user.passions.slice(0, 3)">
+          {{ passion.category }}
+        </div>
+        <div class="passion-tag more-passions" *ngIf="user.passions.length > 3">
+          +{{ user.passions.length - 3 }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

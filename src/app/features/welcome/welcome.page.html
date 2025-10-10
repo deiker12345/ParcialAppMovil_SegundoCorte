@@ -1,13 +1,58 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>welcome</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="welcome-content">
+  <div class="welcome-container">
+    <!-- Logo Section -->
+    <div class="logo-section">
+      <ion-icon name="heart" class="app-logo"></ion-icon>
+      <h1 class="app-title">TinderApp</h1>
+    </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">welcome</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <!-- Welcome Message -->
+    <div class="welcome-message">
+      <h2>¡Bienvenido!</h2>
+      <p>Encuentra tu match perfecto y conecta con personas increíbles cerca de ti.</p>
+    </div>
+
+    <!-- Features Section -->
+    <div class="features-section">
+      <div class="feature-item">
+        <ion-icon name="people" class="feature-icon"></ion-icon>
+        <span>Conoce gente nueva</span>
+      </div>
+      <div class="feature-item">
+        <ion-icon name="chatbubbles" class="feature-icon"></ion-icon>
+        <span>Chatea con tus matches</span>
+      </div>
+      <div class="feature-item">
+        <ion-icon name="location" class="feature-icon"></ion-icon>
+        <span>Encuentra personas cerca</span>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <ion-button 
+        expand="block" 
+        class="primary-button"
+        (click)="navigateToRegister()">
+        Crear Cuenta
+      </ion-button>
+      
+      <ion-button 
+        expand="block" 
+        fill="outline" 
+        class="secondary-button"
+        (click)="navigateToLogin()">
+        Iniciar Sesión
+      </ion-button>
+    </div>
+
+    <!-- Terms and Privacy -->
+    <div class="terms-section">
+      <p class="terms-text">
+        Al continuar, aceptas nuestros 
+        <a href="#" class="terms-link">Términos de Servicio</a> y 
+        <a href="#" class="terms-link">Política de Privacidad</a>
+      </p>
+    </div>
+  </div>
 </ion-content>

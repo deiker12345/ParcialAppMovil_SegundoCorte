@@ -39,6 +39,16 @@ export class UserService {
     return this.getUserProfile(uid);
   }
 
+  getUserById(uid: string): Promise<UserProfile | null> {
+    const userRef = this.getUserDocRef(uid);
+    return getDoc(userRef).then(docSnap => {
+      if (docSnap.exists()) {
+        return docSnap.data() as UserProfile;
+      }
+      return null;
+    });
+  }
+
   updateUserProfile(uid: string, updates: Partial<UserProfile>): Observable<void> {
     const userRef = this.getUserDocRef(uid);
     const updateData = {

@@ -1,0 +1,222 @@
+.swipe-card {
+  width: 100%;
+  max-width: 350px;
+  height: 600px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  background: white;
+  cursor: grab;
+  user-select: none;
+  z-index: 1;
+
+  &.active {
+    z-index: 10;
+    cursor: grab;
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  .card-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    .photo-container {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+
+      .user-photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      // Swipe indicators
+      .like-indicator,
+      .dislike-indicator {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        border-radius: 12px;
+        font-weight: bold;
+        font-size: 1.2rem;
+        opacity: 0;
+        transition: all 0.2s ease;
+        z-index: 5;
+        pointer-events: none;
+      }
+
+      .like-indicator {
+        right: 20px;
+        background: rgba(76, 217, 100, 0.9);
+        color: white;
+        border: 3px solid #4cd964;
+
+        .like-icon {
+          font-size: 2rem;
+          margin-bottom: 8px;
+        }
+
+        .like-text {
+          font-size: 1rem;
+          letter-spacing: 2px;
+        }
+      }
+
+      .dislike-indicator {
+        left: 20px;
+        background: rgba(255, 59, 48, 0.9);
+        color: white;
+        border: 3px solid #ff3b30;
+
+        .dislike-icon {
+          font-size: 2rem;
+          margin-bottom: 8px;
+        }
+
+        .dislike-text {
+          font-size: 1rem;
+          letter-spacing: 2px;
+        }
+      }
+    }
+
+    .user-info {
+      padding: 20px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      color: white;
+
+      .user-header {
+        margin-bottom: 12px;
+
+        .user-name {
+          font-size: 1.8rem;
+          font-weight: 700;
+          margin: 0 0 8px 0;
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .location {
+          display: flex;
+          align-items: center;
+          font-size: 1rem;
+          opacity: 0.9;
+
+          .location-icon {
+            margin-right: 6px;
+            font-size: 1.1rem;
+          }
+        }
+      }
+
+      .passions-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+
+        .passion-tag {
+          background: rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          border-radius: 20px;
+          padding: 6px 12px;
+          font-size: 0.85rem;
+          font-weight: 500;
+          color: white;
+
+          &.more-passions {
+            background: rgba(255, 255, 255, 0.3);
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .swipe-card {
+    max-width: 320px;
+    height: 550px;
+
+    .card-content {
+      .user-info {
+        padding: 16px;
+
+        .user-header {
+          .user-name {
+            font-size: 1.6rem;
+          }
+
+          .location {
+            font-size: 0.9rem;
+          }
+        }
+
+        .passions-container {
+          .passion-tag {
+            font-size: 0.8rem;
+            padding: 5px 10px;
+          }
+        }
+      }
+
+      .photo-container {
+        .like-indicator,
+        .dislike-indicator {
+          padding: 12px;
+
+          .like-icon,
+          .dislike-icon {
+            font-size: 1.5rem;
+          }
+
+          .like-text,
+          .dislike-text {
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Animation states
+.swipe-card {
+  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+
+  &.swiping-right {
+    .like-indicator {
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
+  }
+
+  &.swiping-left {
+    .dislike-indicator {
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
+  }
+}

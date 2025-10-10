@@ -1,0 +1,33 @@
+.message-wrapper {
+  display: flex;
+  margin: 5px 0;
+
+  &.own-message {
+    justify-content: flex-end;
+  }
+
+  &.other-message {
+    justify-content: flex-start;
+  }
+
+  .message-content {
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 15px;
+    background-color: #f1f0f0;
+    position: relative;
+    word-wrap: break-word;
+
+    &.own-message {
+      background-color: #dcf8c6;
+    }
+
+    .timestamp {
+      font-size: 10px;
+      color: #888;
+      position: absolute;
+      bottom: 2px;
+      right: 8px;
+    }
+  }
+}
