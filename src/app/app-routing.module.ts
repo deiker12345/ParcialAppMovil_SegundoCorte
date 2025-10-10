@@ -6,8 +6,13 @@ import { GuestGuard } from './shared/Guard/Guest.Guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'welcome',
     pathMatch: 'full'
+  },
+  {
+    path: 'welcome',
+    loadChildren: () => import('./features/welcome/welcome.module').then( m => m.WelcomePageModule),
+    canActivate: [GuestGuard]
   },
   {
     path: 'login',
@@ -30,12 +35,18 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: '**',
-    redirectTo: 'login'
+    path: 'chat',
+    loadChildren: () => import('./features/chat/chat.module').then(m => m.ChatPageModule),
+    canActivate: [AuthGuard]
   },
   {
-    path: 'welcome',
-    loadChildren: () => import('./features/welcome/welcome.module').then( m => m.WelcomePageModule)
+    path: 'chat-conversation/:chatId',
+    loadChildren: () => import('./features/chat-conversation/chat-conversation.module').then(m => m.ChatConversationPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: '**',
+    redirectTo: 'welcome'
   }
 ];
 
