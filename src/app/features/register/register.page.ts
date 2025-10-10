@@ -34,46 +34,47 @@ export class RegisterPage implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      name: ['', Validators.required],
-      lastName: ['', Validators.required],
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required],
-      birthDate: [null, Validators.required],
-      country: ['', Validators.required],
-      city: ['', Validators.required],
-      gender: ['', Validators.required],
-      showGenderProfile: [true]
+      country: ['', Validators.required]
     });
+  }
+
+  togglePassword(): void {
+    this.showPass = !this.showPass;
   }
 
   async onRegister(): Promise<void> {
     if (this.form.invalid) {
-      await this.showMessage('Complete todos los campos', 'warning');
-      return;
-    }
-
-    if (this.form.value.password !== this.form.value.confirmPassword) {
-      await this.showMessage('Las contraseñas no coinciden', 'warning');
+      await this.showMessage('Please complete all fields correctly', 'warning');
       return;
     }
 
     this.loading = true;
-    const { password, confirmPassword, ...userData } = this.form.value;
+    const { name, lastName, email, password, country } = this.form.value;
 
     try {
-      const user = await this.authService.register(userData.email, password).toPromise();
+      const user = await this.authService.register(email, password).toPromise();
       
       if (user) {
         const profile: UserProfile = {
-          ...userData,
+          name,
+          lastName,
+          email,
+          country,
           uid: user.uid,
           passions: [],
-          photos: []
+          photos: [],
+          birthDate: new Date(),
+          city: '',
+          gender: 'other',
+          showGenderProfile: true
         };
         
         await this.userService.createUserProfile(user.uid, profile).toPromise();
-        await this.showMessage('Cuenta creada exitosamente', 'success');
+        await this.showMessage('Account created successfully!', 'success');
         this.router.navigate(['/home']);
       }
     } catch (error: any) {
@@ -85,12 +86,12 @@ export class RegisterPage implements OnInit {
 
   private getError(error: any): string {
     const errors: Record<string, string> = {
-      'auth/email-already-in-use': 'El email ya está registrado',
-      'auth/invalid-email': 'Email inválido',
-      'auth/weak-password': 'Contraseña muy débil',
-      'auth/network-request-failed': 'Error de conexión'
+      'auth/email-already-in-use': 'Email is already registered',
+      'auth/invalid-email': 'Invalid email address',
+      'auth/weak-password': 'Password is too weak',
+      'auth/network-request-failed': 'Network connection error'
     };
-    return errors[error?.code] || 'Error al registrar usuario';
+    return errors[error?.code] || 'Registration failed. Please try again.';
   }
 
   private async showMessage(message: string, color: string): Promise<void> {

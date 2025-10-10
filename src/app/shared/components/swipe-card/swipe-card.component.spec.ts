@@ -15,6 +15,22 @@ describe('SwipeCardComponent', () => {
 
     fixture = TestBed.createComponent(SwipeCardComponent);
     component = fixture.componentInstance;
+    
+    // Mock required user input
+    component.user = {
+      name: 'Test User',
+      lastName: 'Test',
+      birthDate: new Date('1990-01-01'),
+      email: 'test@test.com',
+      country: 'Test Country',
+      city: 'Test City',
+      gender: 'male',
+      showGenderProfile: true,
+      passions: [],
+      photos: ['test-photo.jpg'],
+      uid: 'test-uid'
+    };
+    
     fixture.detectChanges();
   }));
 

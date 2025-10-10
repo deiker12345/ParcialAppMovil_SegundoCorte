@@ -29,9 +29,13 @@ export class LoginPage implements OnInit {
     });
   }
 
+  togglePassword(): void {
+    this.showPass = !this.showPass;
+  }
+
   async onLogin(): Promise<void> {
     if (this.form.invalid) {
-      await this.showMessage('Complete todos los campos', 'warning');
+      await this.showMessage('Please complete all fields', 'warning');
       return;
     }
 
@@ -40,7 +44,7 @@ export class LoginPage implements OnInit {
 
     try {
       await this.authService.login(email, password).toPromise();
-      await this.showMessage('Bienvenido', 'success');
+      await this.showMessage('Welcome back!', 'success');
       this.router.navigate(['/home']);
     } catch (error: any) {
       await this.showMessage(this.getError(error), 'danger');

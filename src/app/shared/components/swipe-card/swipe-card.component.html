@@ -3,7 +3,7 @@
     <!-- User Photo -->
     <div class="photo-container">
       <img 
-        [src]="user.photos?.[0] || 'assets/icon/default-avatar.png'" 
+        [src]="user.photos[0] || 'assets/icon/default-avatar.png'" 
         [alt]="user.name + ' photo'"
         class="user-photo">
       

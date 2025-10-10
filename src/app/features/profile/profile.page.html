@@ -1,101 +1,191 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Perfil</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
+    <ion-title>Perfil</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="saveProfile()">Guardar</ion-button>
+      <ion-button (click)="saveProfile()" [disabled]="saving || loading">
+        <ion-icon name="checkmark-outline" *ngIf="!saving"></ion-icon>
+        <ion-spinner name="crescent" *ngIf="saving"></ion-spinner>
+        Guardar
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding" *ngIf="!loading; else loadingTpl">
+<ion-content [fullscreen]="true">
+  <div *ngIf="loading" class="loading-container">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Cargando perfil...</p>
+  </div>
 
-  <!-- Nombre y Apellido -->
-  <ion-item>
-    <ion-label position="floating">Nombre</ion-label>
-    <ion-input [(ngModel)]="user.name"></ion-input>
-  </ion-item>
+  <div *ngIf="!loading" class="profile-form">
+    <!-- Información básica -->
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Información Personal</ion-label>
+      </ion-list-header>
 
-  <ion-item>
-    <ion-label position="floating">Apellido</ion-label>
-    <ion-input [(ngModel)]="user.lastName"></ion-input>
-  </ion-item>
+      <ion-item>
+        <ion-input 
+          label="Nombre" 
+          labelPlacement="stacked" 
+          [(ngModel)]="user.name" 
+          placeholder="Tu nombre"
+          required>
+        </ion-input>
+      </ion-item>
 
-  <!-- Email -->
-  <ion-item>
-    <ion-label position="floating">Correo</ion-label>
-    <ion-input [(ngModel)]="user.email" type="email" disabled></ion-input>
-  </ion-item>
+      <ion-item>
+        <ion-input 
+          label="Apellido" 
+          labelPlacement="stacked" 
+          [(ngModel)]="user.lastName" 
+          placeholder="Tu apellido"
+          required>
+        </ion-input>
+      </ion-item>
 
-  <!-- Ciudad y País -->
-  <ion-item>
-    <ion-label position="floating">Ciudad</ion-label>
-    <ion-input [(ngModel)]="user.city"></ion-input>
-  </ion-item>
+      <ion-item>
+        <ion-input 
+          label="Correo" 
+          labelPlacement="stacked" 
+          [(ngModel)]="user.email" 
+          type="email" 
+          placeholder="tu@email.com"
+          readonly>
+        </ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">País</ion-label>
-    <ion-input [(ngModel)]="user.country"></ion-input>
-  </ion-item>
+      <ion-item>
+        <ion-input 
+          label="Ciudad" 
+          labelPlacement="stacked" 
+          [(ngModel)]="user.city" 
+          placeholder="Tu ciudad"
+          required>
+        </ion-input>
+      </ion-item>
 
-  <!-- Género -->
-  <ion-item>
-    <ion-label>Género</ion-label>
-    <ion-select [(ngModel)]="user.gender">
-      <ion-select-option value="male">Masculino</ion-select-option>
-      <ion-select-option value="female">Femenino</ion-select-option>
-      <ion-select-option value="other">Otro</ion-select-option>
-    </ion-select>
-  </ion-item>
+      <ion-item>
+        <ion-input 
+          label="País" 
+          labelPlacement="stacked" 
+          [(ngModel)]="user.country" 
+          placeholder="Tu país"
+          required>
+        </ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label>Mostrar género en perfil</ion-label>
-    <ion-toggle [(ngModel)]="user.showGenderProfile"></ion-toggle>
-  </ion-item>
+      <ion-item>
+        <ion-select 
+          label="Género" 
+          labelPlacement="stacked" 
+          [(ngModel)]="user.gender" 
+          placeholder="Selecciona tu género">
+          <ion-select-option value="male">Masculino</ion-select-option>
+          <ion-select-option value="female">Femenino</ion-select-option>
+          <ion-select-option value="other">Otro</ion-select-option>
+        </ion-select>
+      </ion-item>
 
-  <!-- Pasiones -->
-  <ion-list>
-    <ion-list-header>
-      <ion-label>Pasiones</ion-label>
-    </ion-list-header>
+      <ion-item>
+        <ion-label>Mostrar género en perfil</ion-label>
+        <ion-toggle [(ngModel)]="user.showGenderProfile"></ion-toggle>
+      </ion-item>
+    </ion-list>
 
-    <ion-item *ngFor="let passion of user.passions; let i = index">
-      <ion-label>{{ passion.category }}</ion-label>
-      <ion-button fill="clear" color="danger" (click)="removePassion(i)">
-        <ion-icon name="trash-outline"></ion-icon>
-      </ion-button>
-    </ion-item>
+    <!-- Pasiones -->
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Pasiones (máximo 5)</ion-label>
+      </ion-list-header>
 
-    <ion-item>
-      <ion-input #newPassion placeholder="Nueva pasión"></ion-input>
-      <ion-button (click)="addPassionFromInput()">Agregar</ion-button>
-    </ion-item>
-  </ion-list>
+      <div class="passions-grid" *ngIf="user.passions.length > 0">
+        <ion-chip 
+          *ngFor="let passion of user.passions; let i = index" 
+          color="primary"
+          class="passion-chip">
+          <ion-label>{{ passion.category }}</ion-label>
+          <ion-icon name="close-circle" (click)="removePassion(i)"></ion-icon>
+        </ion-chip>
+      </div>
 
-  <!-- Fotos -->
-  <ion-list>
-    <ion-list-header>
-      <ion-label>Fotos</ion-label>
-    </ion-list-header>
+      <ion-item *ngIf="user.passions.length < 5">
+        <ion-input 
+          #newPassion 
+          label="Nueva pasión" 
+          labelPlacement="stacked" 
+          placeholder="Ej: Música, Deportes, Viajes..."
+          (keyup.enter)="addPassionFromInput()">
+        </ion-input>
+        <ion-button 
+          slot="end" 
+          fill="clear" 
+          (click)="addPassionFromInput()"
+          [disabled]="user.passions.length >= 5">
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+      </ion-item>
 
-    <ion-item *ngFor="let photo of user.photos; let i = index">
-      <ion-avatar slot="start">
-        <img [src]="photo" />
-      </ion-avatar>
-      <ion-button fill="clear" color="danger" (click)="removePhoto(i)">
-        <ion-icon name="trash-outline"></ion-icon>
-      </ion-button>
-    </ion-item>
+      <ion-note *ngIf="user.passions.length >= 5" color="warning">
+        Has alcanzado el máximo de pasiones permitidas
+      </ion-note>
+    </ion-list>
 
-    <ion-item>
-      <input type="file" (change)="uploadPhoto($event)" accept="image/*" />
-    </ion-item>
-  </ion-list>
+    <!-- Fotos -->
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Fotos (máximo 6)</ion-label>
+      </ion-list-header>
 
+      <div class="photos-grid" *ngIf="user.photos.length > 0">
+        <div 
+          *ngFor="let photo of user.photos; let i = index" 
+          class="photo-item">
+          <app-image-display 
+            [src]="photo" 
+            [alt]="'Foto ' + (i + 1)"
+            width="100%"
+            height="100%">
+          </app-image-display>
+          <ion-button 
+            fill="clear" 
+            color="danger" 
+            class="remove-photo-btn"
+            (click)="removePhoto(i)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+
+      <ion-item *ngIf="user.photos.length < 6">
+        <ion-label>
+          <div class="upload-area">
+            <ion-icon name="camera-outline" size="large"></ion-icon>
+            <p>Seleccionar foto</p>
+            <input 
+              type="file" 
+              (change)="uploadPhoto($event)" 
+              accept="image/*"
+              [disabled]="uploading" />
+          </div>
+        </ion-label>
+        <ion-spinner 
+          *ngIf="uploading" 
+          name="crescent" 
+          slot="end">
+        </ion-spinner>
+      </ion-item>
+
+      <ion-note *ngIf="user.photos.length === 0" color="warning">
+        Debes subir al menos una foto para completar tu perfil
+      </ion-note>
+
+      <ion-note *ngIf="user.photos.length >= 6" color="medium">
+        Has alcanzado el máximo de fotos permitidas
+      </ion-note>
+    </ion-list>
+  </div>
 </ion-content>
-
-<ng-template #loadingTpl>
-  <ion-spinner></ion-spinner>
-</ng-template>

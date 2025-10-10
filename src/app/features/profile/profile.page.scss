@@ -11,3 +11,188 @@ ion-item ion-avatar {
 ion-button {
   margin-left: 5px;
 }
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  
+  ion-spinner {
+    margin-bottom: 16px;
+  }
+  
+  p {
+    color: var(--ion-color-medium);
+    font-size: 1rem;
+  }
+}
+
+.profile-form {
+  padding: 16px;
+}
+
+ion-list {
+  margin-bottom: 24px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+ion-list-header {
+  background: var(--ion-color-light);
+  
+  ion-label {
+    font-weight: 600;
+    color: var(--ion-color-dark);
+  }
+}
+
+ion-item {
+  --border-radius: 0;
+  --inner-padding-end: 16px;
+  
+  ion-input, ion-select {
+    --padding-start: 0;
+  }
+}
+
+// Pasiones
+.passions-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px;
+  
+  .passion-chip {
+    --background: var(--ion-color-primary);
+    --color: white;
+    cursor: pointer;
+    
+    ion-icon {
+      margin-left: 8px;
+      cursor: pointer;
+      
+      &:hover {
+        color: var(--ion-color-danger);
+      }
+    }
+  }
+}
+
+// Fotos
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  padding: 16px;
+  
+  .photo-item {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .remove-photo-btn {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      --background: rgba(255, 255, 255, 0.9);
+      --color: var(--ion-color-danger);
+      --border-radius: 50%;
+      --padding-start: 8px;
+      --padding-end: 8px;
+      width: 32px;
+      height: 32px;
+      
+      ion-icon {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.upload-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  border: 2px dashed var(--ion-color-medium);
+  border-radius: 12px;
+  background: var(--ion-color-light);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  
+  &:hover {
+    border-color: var(--ion-color-primary);
+    background: var(--ion-color-primary-tint);
+  }
+  
+  ion-icon {
+    color: var(--ion-color-medium);
+    margin-bottom: 8px;
+  }
+  
+  p {
+    margin: 0;
+    color: var(--ion-color-medium);
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  
+  input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+}
+
+ion-note {
+  display: block;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  
+  &[color="warning"] {
+    background: rgba(255, 193, 7, 0.1);
+    border-left: 3px solid var(--ion-color-warning);
+  }
+  
+  &[color="medium"] {
+    background: rgba(146, 148, 151, 0.1);
+    border-left: 3px solid var(--ion-color-medium);
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .photos-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 12px;
+  }
+  
+  .passions-grid {
+    padding: 12px;
+  }
+  
+  .profile-form {
+    padding: 12px;
+  }
+}

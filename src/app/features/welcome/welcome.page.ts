@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../shared/service/auth.service';
 
 @Component({
   selector: 'app-welcome',
@@ -9,9 +10,18 @@ import { Router } from '@angular/router';
 })
 export class WelcomePage implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    // Verificar si el usuario ya está autenticado
+    const currentUser = this.authService.getCurrentUser();
+    if (currentUser) {
+      // Si ya está autenticado, redirigir al home
+      this.router.navigate(['/home']);
+    }
   }
 
   navigateToLogin() {

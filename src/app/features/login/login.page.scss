@@ -1,177 +1,191 @@
-// login.page.scss
-
-// 🎨 Variables de color - Tema Masculino
-$primary-color: #1a73e8;
-$secondary-color: #34a853;
-$background-gradient: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
-$accent-color: #00d4ff;
-$text-color: #333;
-$input-bg: rgba(255, 255, 255, 0.95);
-$shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-
-// 🌟 Contenedor principal
 .login-content {
-  --background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
-  --padding-start: 20px;
-  --padding-end: 20px;
-  --padding-top: 40px;
-  --padding-bottom: 20px;
-  
+  --background: linear-gradient(135deg, #ff4458 0%, #ff6b7a 100%);
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
   min-height: 100vh;
+  padding: 20px;
 }
 
-// 🎭 Contenedor de bienvenida
-.welcome-container {
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-section {
   text-align: center;
-  margin-bottom: 48px;
-  animation: fadeInDown 0.8s ease-out;
-
-  h1 {
-    font-size: 32px;
-    font-weight: 700;
-    color: #ffffff;
-    margin: 0;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    letter-spacing: -0.5px;
+  margin-bottom: 60px;
+  
+  .tinder-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    
+    .flame-icon {
+      font-size: 2.5rem;
+      color: white;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    }
+    
+    .app-title {
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: white;
+      margin: 0;
+      letter-spacing: -1px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
   }
 }
 
-// 📝 Campos de entrada
-ion-item {
-  --background: rgba(255, 255, 255, 0.95);
-  --border-radius: 12px;
-  --padding-start: 16px;
-  --padding-end: 16px;
-  --inner-padding-end: 0;
-  --highlight-background: transparent;
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group {
+  position: relative;
   
-  margin-bottom: 16px;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-
-  &:hover {
-    box-shadow: 0 6px 20px rgba(0, 212, 255, 0.2);
-    transform: translateY(-2px);
-  }
-
-  ion-label {
-    --color: #2c5364 !important;
-    font-weight: 600;
-    font-size: 14px;
-  }
-
-  ion-input {
+  .custom-input {
+    --background: white;
     --color: #333;
     --placeholder-color: #999;
+    --border-radius: 8px;
+    --border-width: 1px;
+    --border-color: #ddd;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --padding-top: 16px;
+    --padding-bottom: 16px;
     font-size: 16px;
+    height: 56px;
+    
+    &.ion-focused {
+      --border-color: #ff4458;
+      --border-width: 2px;
+    }
+  }
+  
+  .password-toggle {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    --color: #999;
+    --background: transparent;
+    --padding-start: 8px;
+    --padding-end: 8px;
+    z-index: 10;
   }
 }
 
-// 🔘 Botones
-ion-button {
-  --border-radius: 12px;
+.forgot-password {
+  text-align: center;
+  margin-top: -10px;
+  
+  .forgot-link {
+    color: white;
+    text-decoration: underline;
+    font-size: 14px;
+    opacity: 0.9;
+    
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.login-btn {
+  --background: linear-gradient(135deg, #ff9500 0%, #ffb347 100%);
+  --color: white;
+  --border-radius: 28px;
   --padding-top: 16px;
   --padding-bottom: 16px;
-  margin-top: 12px;
-  font-weight: 600;
+  --box-shadow: 0 4px 16px rgba(255, 149, 0, 0.3);
   font-size: 16px;
-  letter-spacing: 0.5px;
+  font-weight: 600;
   text-transform: none;
-  transition: all 0.3s ease;
-
-  &[expand="block"] {
-    margin-bottom: 12px;
+  margin-top: 20px;
+  
+  &:hover:not([disabled]) {
+    --box-shadow: 0 6px 20px rgba(255, 149, 0, 0.4);
+    transform: translateY(-1px);
   }
+  
+  &[disabled] {
+    --background: #ccc;
+    --color: #999;
+    --box-shadow: none;
+  }
+}
 
-  // Botón principal
-  &:not([fill="clear"]) {
-    --background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
-    --box-shadow: 0 4px 16px rgba(0, 212, 255, 0.4);
-    --color: #000000;
+.register-link {
+  text-align: center;
+  margin-top: 30px;
+  color: white;
+  font-size: 14px;
+  
+  .register-text {
+    color: white;
+    text-decoration: underline;
+    font-weight: 600;
     
     &:hover {
-      --box-shadow: 0 6px 20px rgba(0, 212, 255, 0.6);
-      transform: translateY(-2px);
-    }
-
-    &:active {
-      transform: translateY(0);
-    }
-  }
-
-  // Botón secundario
-  &[fill="clear"] {
-    --color: #00d4ff;
-    --background-hover: rgba(0, 212, 255, 0.1);
-    font-weight: 500;
-    
-    &:hover {
-      --background: rgba(0, 212, 255, 0.15);
+      opacity: 0.8;
     }
   }
 }
 
-// ✨ Animaciones
-@keyframes fadeInDown {
+// Responsive design
+@media (max-width: 480px) {
+  .login-content {
+    padding: 16px;
+  }
+  
+  .logo-section {
+    margin-bottom: 40px;
+    
+    .tinder-logo {
+      .flame-icon {
+        font-size: 2rem;
+      }
+      
+      .app-title {
+        font-size: 2rem;
+      }
+    }
+  }
+  
+  .input-group .custom-input {
+    height: 50px;
+    font-size: 14px;
+  }
+  
+  .login-btn {
+    --padding-top: 14px;
+    --padding-bottom: 14px;
+    font-size: 14px;
+  }
+}
+
+// Animation for smooth transitions
+.login-container {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-// 📱 Responsive
-@media (min-width: 768px) {
-  .login-content {
-    --padding-start: 0;
-    --padding-end: 0;
-
-    ion-item,
-    ion-button {
-      max-width: 400px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .welcome-container h1 {
-      font-size: 40px;
-    }
-  }
-}
-
-// 🌐 Soporte para modo oscuro
-@media (prefers-color-scheme: dark) {
-  ion-item {
-    --background: rgba(255, 255, 255, 0.1);
-    
-    ion-label {
-      --color: #00d4ff !important;
-    }
-
-    ion-input {
-      --color: #ffffff;
-      --placeholder-color: #cccccc;
-    }
-  }
-}
-
-// 🎯 Header personalizado
-ion-header {
-  ion-toolbar {
-    --background: transparent;
-    --border-width: 0;
-    
-    ion-title {
-      color: #ffffff;
-      font-weight: 600;
-    }
   }
 }
