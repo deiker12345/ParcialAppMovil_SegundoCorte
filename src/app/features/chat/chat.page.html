@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Chats</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="chat-list-content">
+  
+  <div class="chat-list" *ngIf="chats.length > 0; else noChats">
+    <ion-item 
+      *ngFor="let chat of chats" 
+      button 
+      (click)="openChat(chat)"
+      class="chat-item">
+      
+      <ion-avatar slot="start">
+        <img 
+          [src]="getOtherUserProfile(chat)?.photos?.[0] || 'assets/icon/default-avatar.png'" 
+          [alt]="getOtherUserProfile(chat)?.name + ' avatar'">
+      </ion-avatar>
+      
+      <ion-label>
+        <h2 class="chat-name">
+          {{ getOtherUserProfile(chat)?.name || 'Usuario' }}
+        </h2>
+        <p class="last-message" 
+           [class.own-message]="chat.lastMessage?.senderId === currentUserId">
+          <span *ngIf="chat.lastMessage?.senderId === currentUserId" class="you-prefix">Tú: </span>
+          {{ chat.lastMessage?.text || 'Sin mensajes' }}
+        </p>
+      </ion-label>
+      
+      <ion-note slot="end" class="timestamp">
+        {{ formatTimestamp(chat.lastMessage?.timestamp || getCurrentDate()) }}
+      </ion-note>
+      
+    </ion-item>
+  </div>
+
+  <ng-template #noChats>
+    <div class="no-chats-container">
+      <ion-icon name="chatbubbles-outline" class="no-chats-icon"></ion-icon>
+      <h3>No tienes chats aún</h3>
+      <p>Cuando hagas match con alguien, aparecerán aquí tus conversaciones.</p>
+      <ion-button 
+        expand="block" 
+        fill="outline" 
+        (click)="goBack()"
+        class="back-to-matching-btn">
+        Volver al Matching
+      </ion-button>
+    </div>
+  </ng-template>
+
+</ion-content>

@@ -1,0 +1,153 @@
+.chat-list-content {
+  --background: #f8f9fa;
+
+  .chat-list {
+    padding: 0;
+
+    .chat-item {
+      --background: white;
+      --border-color: #e9ecef;
+      margin: 8px 16px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      }
+
+      ion-avatar {
+        width: 56px;
+        height: 56px;
+        margin-right: 16px;
+
+        img {
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
+
+      ion-label {
+        .chat-name {
+          font-size: 1.1rem;
+          font-weight: 600;
+          color: #2c3e50;
+          margin-bottom: 4px;
+        }
+
+        .last-message {
+          font-size: 0.9rem;
+          color: #6c757d;
+          margin: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          max-width: 200px;
+
+          &.own-message {
+            color: #495057;
+          }
+
+          .you-prefix {
+            font-weight: 500;
+            color: #007bff;
+          }
+        }
+      }
+
+      .timestamp {
+        font-size: 0.8rem;
+        color: #adb5bd;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .no-chats-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+    padding: 2rem;
+    text-align: center;
+
+    .no-chats-icon {
+      font-size: 4rem;
+      color: #dee2e6;
+      margin-bottom: 1.5rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #495057;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #6c757d;
+      line-height: 1.5;
+      margin-bottom: 2rem;
+      max-width: 280px;
+    }
+
+    .back-to-matching-btn {
+      --color: #007bff;
+      --border-color: #007bff;
+      font-weight: 600;
+      height: 44px;
+      border-radius: 22px;
+      min-width: 200px;
+    }
+  }
+}
+
+// Header customization
+ion-header {
+  ion-toolbar {
+    --background: white;
+    --color: #2c3e50;
+    --border-color: #e9ecef;
+
+    ion-title {
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+
+    ion-button {
+      --color: #007bff;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .chat-list-content {
+    .chat-list {
+      .chat-item {
+        margin: 4px 8px;
+
+        ion-label {
+          .last-message {
+            max-width: 150px;
+          }
+        }
+      }
+    }
+
+    .no-chats-container {
+      padding: 1rem;
+
+      h3 {
+        font-size: 1.3rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
