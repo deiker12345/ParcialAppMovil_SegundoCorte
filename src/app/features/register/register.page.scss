@@ -1,156 +1,590 @@
-// Variables de color
+// Variables profesionales
 :root {
-  --tinder-primary: #fd5068;
-  --tinder-secondary: #ff7854;
-  --tinder-background: linear-gradient(135deg, #fd5068 0%, #ff7854 100%);
-  --tinder-white: #ffffff;
-  --tinder-text-light: rgba(255, 255, 255, 0.8);
-  --tinder-input-bg: rgba(255, 255, 255, 0.1);
-  --tinder-input-border: rgba(255, 255, 255, 0.3);
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --accent-color: #667eea;
+  --text-primary: #2d3748;
+  --text-secondary: #718096;
+  --white: #ffffff;
+  --background-light: #f7fafc;
+  --background-dark: #1a202c;
+  --border-color: #e2e8f0;
+  --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --shadow-strong: 0 20px 40px rgba(0, 0, 0, 0.15);
+  --success-color: #48bb78;
+  --error-color: #e53e3e;
 }
 
 .register-content {
-  --background: var(--tinder-background);
-  --color: var(--tinder-white);
+  --background: var(--background-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 0;
+  position: relative;
+  background: var(--background-dark);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: var(--primary-gradient);
+    border-radius: 0 0 40px 40px;
+    z-index: 0;
+  }
 }
 
 .register-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 2rem 1.5rem;
-  animation: fadeInUp 0.6s ease-out;
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+  z-index: 1;
+  padding: 0 20px;
+  margin: 0;
 }
 
-// Logo y título
+.register-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 40px 30px;
+  box-shadow: var(--shadow-strong);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 20px 0;
+}
+
 .logo-section {
   text-align: center;
-  margin-bottom: 3rem;
-
-  .tinder-logo {
+  margin-bottom: 30px;
+  
+  .app-logo {
+    width: 70px;
+    height: 70px;
+    background: var(--primary-gradient);
+    border-radius: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 2rem;
-
+    margin: 0 auto 16px;
+    box-shadow: var(--shadow-medium);
+    
     .flame-icon {
-      font-size: 2.5rem;
-      color: var(--tinder-white);
-      margin-right: 0.5rem;
-    }
-
-    .app-title {
-      font-size: 2.5rem;
-      font-weight: 300;
-      color: var(--tinder-white);
-      margin: 0;
-      letter-spacing: 2px;
+      font-size: 2rem;
+      color: var(--white);
     }
   }
-
-  .page-title {
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: var(--tinder-white);
+  
+  .app-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 6px 0;
+    letter-spacing: -0.5px;
+  }
+  
+  .page-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
     margin: 0;
-    opacity: 0.9;
+    font-weight: 400;
   }
 }
 
-// Formulario
 .register-form {
-  width: 100%;
-  max-width: 350px;
-
-  .input-group {
+  .form-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    
+    .form-group {
+      flex: 1;
+      margin-bottom: 0;
+    }
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
     position: relative;
-    margin-bottom: 1.5rem;
-
-    .custom-input {
-      --background: var(--tinder-input-bg);
-      --border-color: var(--tinder-input-border);
-      --color: var(--tinder-white);
-      --placeholder-color: var(--tinder-text-light);
-      --border-radius: 25px;
-      --padding-start: 20px;
-      --padding-end: 20px;
-      --min-height: 50px;
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--tinder-input-border);
+    
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    
+    .form-input {
+      --background: var(--white);
+      --color: var(--text-primary);
+      --placeholder-color: var(--text-secondary);
+      --border-radius: 10px;
+      --border-width: 2px;
+      --border-color: var(--border-color);
+      --padding-start: 14px;
+      --padding-end: 14px;
+      --padding-top: 14px;
+      --padding-bottom: 14px;
+      font-size: 15px;
+      height: 50px;
       transition: all 0.3s ease;
-
-      &:focus-within {
-        --border-color: var(--tinder-white);
-        --background: rgba(255, 255, 255, 0.15);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      box-shadow: var(--shadow-light);
+      
+      &.ion-focused {
+        --border-color: var(--accent-color);
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+      
+      &.ion-invalid.ion-touched {
+        --border-color: var(--error-color);
+        box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+      }
+      
+      &.ion-valid.ion-touched {
+        --border-color: var(--success-color);
+        box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.1);
       }
     }
-
+    
+    .form-select {
+      --background: var(--white);
+      --color: var(--text-primary);
+      --placeholder-color: var(--text-secondary);
+      --border-radius: 10px;
+      --border-width: 2px;
+      --border-color: var(--border-color);
+      --padding-start: 14px;
+      --padding-end: 14px;
+      --padding-top: 14px;
+      --padding-bottom: 14px;
+      font-size: 15px;
+      height: 50px;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-light);
+      
+      &.ion-focused {
+        --border-color: var(--accent-color);
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+    }
+    
     .password-toggle {
       position: absolute;
       right: 10px;
       top: 50%;
       transform: translateY(-50%);
-      --color: var(--tinder-text-light);
-      z-index: 10;
-
-      ion-icon {
-        font-size: 1.2rem;
+      --color: var(--text-secondary);
+      --padding-start: 8px;
+      --padding-end: 8px;
+      margin-top: 13px;
+      
+      &:hover {
+        --color: var(--accent-color);
+      }
+    }
+    
+    .error-message {
+      color: var(--error-color);
+      font-size: 11px;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+    
+    .success-message {
+      color: var(--success-color);
+      font-size: 11px;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+  }
+  
+  .terms-section {
+    margin: 24px 0;
+    
+    .terms-checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      
+      .custom-checkbox {
+        --background: var(--white);
+        --background-checked: var(--accent-color);
+        --border-color: var(--border-color);
+        --border-color-checked: var(--accent-color);
+        --checkmark-color: var(--white);
+        --size: 18px;
+        margin-top: 2px;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          --border-color: var(--accent-color);
+        }
+      }
+      
+      .terms-text {
+        color: var(--text-secondary);
+        font-size: 13px;
+        line-height: 1.4;
+        
+        .terms-link {
+          color: var(--accent-color);
+          text-decoration: none;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          
+          &:hover {
+            color: #5a67d8;
+            text-decoration: underline;
+          }
+        }
       }
     }
   }
-
-  // Botón de continuar
-  .continue-btn {
-    --background: linear-gradient(45deg, #ff7854, #fd5068);
-    --color: var(--tinder-white);
-    --border-radius: 25px;
-    --box-shadow: 0 8px 25px rgba(253, 80, 104, 0.3);
-    height: 50px;
+  
+  .register-button {
+    --background: var(--primary-gradient);
+    --color: var(--white);
+    --border-radius: 10px;
+    --padding-top: 14px;
+    --padding-bottom: 14px;
+    --box-shadow: var(--shadow-medium);
+    font-size: 15px;
     font-weight: 600;
-    font-size: 1rem;
-    margin: 2rem 0 1.5rem 0;
+    text-transform: none;
+    height: 50px;
+    margin-bottom: 20px;
     transition: all 0.3s ease;
-
+    
     &:hover:not([disabled]) {
+      --box-shadow: var(--shadow-strong);
       transform: translateY(-2px);
-      --box-shadow: 0 12px 35px rgba(253, 80, 104, 0.4);
     }
-
+    
     &[disabled] {
-      opacity: 0.6;
+      --background: #cbd5e0;
+      --color: #a0aec0;
+      --box-shadow: none;
+      opacity: 0.7;
+    }
+    
+    .button-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
   }
-
-  // Enlace de login
+  
+  .divider {
+    display: flex;
+    align-items: center;
+    margin: 24px 0;
+    
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-color);
+    }
+    
+    .divider-text {
+      padding: 0 12px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+    }
+  }
+  
+  .social-register {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+    
+    .social-button {
+      --background: var(--white);
+      --color: var(--text-primary);
+      --border-radius: 10px;
+      --border-width: 2px;
+      --border-color: var(--border-color);
+      --padding-top: 10px;
+      --padding-bottom: 10px;
+      --box-shadow: var(--shadow-light);
+      flex: 1;
+      height: 44px;
+      font-weight: 600;
+      font-size: 13px;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        --border-color: var(--accent-color);
+        --box-shadow: var(--shadow-medium);
+        transform: translateY(-1px);
+      }
+      
+      &.google {
+        --color: #db4437;
+      }
+      
+      &.facebook {
+        --color: #4267b2;
+      }
+    }
+  }
+  
   .login-link {
     text-align: center;
-    margin-top: 1rem;
-    color: var(--tinder-text-light);
-    font-size: 0.9rem;
-
+    
     .login-text {
-      color: var(--tinder-white);
-      text-decoration: none;
-      font-weight: 600;
-      transition: opacity 0.3s ease;
-
-      &:hover {
-        opacity: 0.8;
-        text-decoration: underline;
+      color: var(--text-secondary);
+      font-size: 13px;
+      
+      .login-link-text {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          color: #5a67d8;
+          text-decoration: underline;
+        }
       }
     }
   }
 }
 
-// Animación
-@keyframes fadeInUp {
+// Progress indicator
+.progress-section {
+  margin-bottom: 24px;
+  
+  .progress-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  
+  .progress-bar {
+    height: 4px;
+    background: var(--border-color);
+    border-radius: 2px;
+    overflow: hidden;
+    
+    .progress-fill {
+      height: 100%;
+      background: var(--primary-gradient);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+  }
+}
+
+// Loading overlay
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(5px);
+  
+  .loading-content {
+    text-align: center;
+    
+    ion-spinner {
+      --color: var(--accent-color);
+      width: 40px;
+      height: 40px;
+      margin-bottom: 16px;
+    }
+    
+    .loading-text {
+      color: var(--text-primary);
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+}
+
+// Responsive design para móvil
+@media (max-width: 480px) {
+  .register-content {
+    padding: 0;
+    min-height: 100vh;
+    
+    &::before {
+      border-radius: 0 0 30px 30px;
+      height: 40%;
+    }
+  }
+  
+  .register-container {
+    padding: 10px;
+    max-width: 100%;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .register-card {
+    padding: 30px 20px;
+    border-radius: 16px;
+    margin: 0;
+    width: 100%;
+    max-width: 350px;
+    min-height: auto;
+  }
+  
+  .logo-section {
+    margin-bottom: 20px;
+    
+    .app-logo {
+      width: 60px;
+      height: 60px;
+      
+      .flame-icon {
+        font-size: 1.8rem;
+      }
+    }
+    
+    .app-title {
+      font-size: 1.6rem;
+    }
+    
+    .page-subtitle {
+      font-size: 0.85rem;
+    }
+  }
+  
+  .register-form {
+    .form-row {
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 0;
+      
+      .form-group {
+        margin-bottom: 16px;
+      }
+    }
+    
+    .form-group {
+      margin-bottom: 16px;
+      
+      .form-input,
+      .form-select {
+        height: 46px;
+        --padding-top: 12px;
+        --padding-bottom: 12px;
+        font-size: 14px;
+      }
+    }
+    
+    .register-button {
+      height: 46px;
+      font-size: 14px;
+    }
+    
+    .social-register .social-button {
+      height: 40px;
+      font-size: 12px;
+    }
+    
+    .terms-section {
+      margin: 20px 0;
+      
+      .terms-checkbox .terms-text {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+// Para pantallas muy pequeñas
+@media (max-width: 360px) {
+  .register-container {
+    padding: 5px;
+  }
+  
+  .register-card {
+    padding: 25px 15px;
+    border-radius: 12px;
+  }
+  
+  .logo-section {
+    margin-bottom: 16px;
+    
+    .app-logo {
+      width: 50px;
+      height: 50px;
+      
+      .flame-icon {
+        font-size: 1.5rem;
+      }
+    }
+    
+    .app-title {
+      font-size: 1.4rem;
+    }
+    
+    .page-subtitle {
+      font-size: 0.8rem;
+    }
+  }
+  
+  .register-form {
+    .form-group {
+      margin-bottom: 14px;
+      
+      .form-input,
+      .form-select {
+        height: 44px;
+        font-size: 13px;
+      }
+    }
+    
+    .register-button {
+      height: 44px;
+      font-size: 13px;
+    }
+    
+    .social-register .social-button {
+      height: 38px;
+      font-size: 11px;
+    }
+    
+    .terms-section {
+      margin: 16px 0;
+      
+      .terms-checkbox .terms-text {
+        font-size: 11px;
+      }
+    }
+  }
+}
+
+// Animations
+.register-container {
+  animation: slideInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes slideInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(50px);
   }
   to {
     opacity: 1;
@@ -158,48 +592,32 @@
   }
 }
 
-// Responsive design
-@media (min-width: 768px) {
-  .register-container {
-    padding: 3rem 2rem;
-  }
-
-  .logo-section {
-    .tinder-logo {
-      .flame-icon {
-        font-size: 3rem;
-      }
-
-      .app-title {
-        font-size: 3rem;
-      }
-    }
-
-    .page-title {
-      font-size: 1.8rem;
-    }
-  }
-
-  .register-form {
-    max-width: 400px;
-
-    .input-group .custom-input {
-      --min-height: 55px;
-      --padding-start: 25px;
-      --padding-end: 25px;
-    }
-
-    .continue-btn {
-      height: 55px;
-      font-size: 1.1rem;
-    }
-  }
+// Focus states and accessibility
+.form-input:focus-within,
+.form-select:focus-within {
+  outline: none;
 }
 
-// Dark mode support
-@media (prefers-color-scheme: dark) {
-  :root {
-    --tinder-input-bg: rgba(255, 255, 255, 0.08);
-    --tinder-input-border: rgba(255, 255, 255, 0.2);
-  }
+.register-button:focus,
+.social-button:focus,
+.terms-link:focus,
+.login-link-text:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+// Form validation states
+.form-group.has-error .form-input {
+  --border-color: var(--error-color);
+  animation: shake 0.5s ease-in-out;
+}
+
+.form-group.has-success .form-input {
+  --border-color: var(--success-color);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
 }

@@ -1,94 +1,168 @@
 <ion-content class="register-content">
   <div class="register-container">
-    <!-- Logo y título -->
-    <div class="logo-section">
-      <div class="tinder-logo">
-        <ion-icon name="flame" class="flame-icon"></ion-icon>
-        <h1 class="app-title">tinder</h1>
-      </div>
-      <h2 class="page-title">My Information</h2>
-    </div>
-
-    <!-- Formulario -->
-    <form [formGroup]="form" (ngSubmit)="onRegister()" class="register-form">
-      <!-- Campo Nombre -->
-      <div class="input-group">
-        <ion-input
-          type="text"
-          placeholder="First name"
-          formControlName="name"
-          fill="outline"
-          class="custom-input">
-        </ion-input>
+    <div class="register-card">
+      <!-- Logo y título -->
+      <div class="logo-section">
+        <div class="app-logo">
+          <ion-icon name="flame" class="flame-icon"></ion-icon>
+        </div>
+        <h1 class="app-title">Tinder</h1>
+        <p class="page-subtitle">Crea tu cuenta para comenzar</p>
       </div>
 
-      <!-- Campo Apellido -->
-      <div class="input-group">
-        <ion-input
-          type="text"
-          placeholder="Last name"
-          formControlName="lastName"
-          fill="outline"
-          class="custom-input">
-        </ion-input>
-      </div>
+      <!-- Formulario -->
+      <form [formGroup]="form" (ngSubmit)="onRegister()" class="register-form">
+        <!-- Fila de nombres -->
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nombre</label>
+            <ion-input
+              type="text"
+              placeholder="Tu nombre"
+              formControlName="name"
+              fill="outline"
+              class="form-input">
+            </ion-input>
+            <div class="error-message" *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+              El nombre es requerido
+            </div>
+          </div>
 
-      <!-- Campo Email -->
-      <div class="input-group">
-        <ion-input
-          type="email"
-          placeholder="Email"
-          formControlName="email"
-          fill="outline"
-          class="custom-input"
-          autocomplete="email">
-        </ion-input>
-      </div>
+          <div class="form-group">
+            <label class="form-label">Apellido</label>
+            <ion-input
+              type="text"
+              placeholder="Tu apellido"
+              formControlName="lastName"
+              fill="outline"
+              class="form-input">
+            </ion-input>
+            <div class="error-message" *ngIf="form.get('lastName')?.invalid && form.get('lastName')?.touched">
+              El apellido es requerido
+            </div>
+          </div>
+        </div>
 
-      <!-- Campo Contraseña -->
-      <div class="input-group">
-        <ion-input
-          [type]="showPass ? 'text' : 'password'"
-          placeholder="Password"
-          formControlName="password"
-          fill="outline"
-          class="custom-input"
-          autocomplete="new-password">
-        </ion-input>
+        <!-- Campo Email -->
+        <div class="form-group">
+          <label class="form-label">Correo electrónico</label>
+          <ion-input
+            type="email"
+            placeholder="tu@email.com"
+            formControlName="email"
+            fill="outline"
+            class="form-input"
+            autocomplete="email">
+          </ion-input>
+          <div class="error-message" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+            Ingresa un email válido
+          </div>
+        </div>
+
+        <!-- Campo Contraseña -->
+        <div class="form-group">
+          <label class="form-label">Contraseña</label>
+          <ion-input
+            [type]="showPass ? 'text' : 'password'"
+            placeholder="Mínimo 6 caracteres"
+            formControlName="password"
+            fill="outline"
+            class="form-input"
+            autocomplete="new-password">
+          </ion-input>
+          <ion-button 
+            fill="clear" 
+            class="password-toggle"
+            (click)="togglePassword()">
+            <ion-icon [name]="showPass ? 'eye-off' : 'eye'" slot="icon-only"></ion-icon>
+          </ion-button>
+          <div class="error-message" *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+            La contraseña debe tener al menos 6 caracteres
+          </div>
+        </div>
+
+        <!-- Campo País -->
+        <div class="form-group">
+          <label class="form-label">País</label>
+          <ion-select
+            placeholder="Selecciona tu país"
+            formControlName="country"
+            fill="outline"
+            class="form-select">
+            <ion-select-option value="AR">Argentina</ion-select-option>
+            <ion-select-option value="BR">Brasil</ion-select-option>
+            <ion-select-option value="CL">Chile</ion-select-option>
+            <ion-select-option value="CO">Colombia</ion-select-option>
+            <ion-select-option value="MX">México</ion-select-option>
+            <ion-select-option value="PE">Perú</ion-select-option>
+            <ion-select-option value="ES">España</ion-select-option>
+            <ion-select-option value="US">Estados Unidos</ion-select-option>
+            <ion-select-option value="OTHER">Otro</ion-select-option>
+          </ion-select>
+          <div class="error-message" *ngIf="form.get('country')?.invalid && form.get('country')?.touched">
+            Selecciona tu país
+          </div>
+        </div>
+
+        <!-- Términos y condiciones -->
+        <div class="terms-section">
+          <div class="terms-checkbox">
+            <ion-checkbox class="custom-checkbox" formControlName="acceptTerms"></ion-checkbox>
+            <div class="terms-text">
+              Acepto los <a href="#" class="terms-link">Términos y Condiciones</a> y la 
+              <a href="#" class="terms-link">Política de Privacidad</a>
+            </div>
+          </div>
+          <div class="error-message" *ngIf="form.get('acceptTerms')?.invalid && form.get('acceptTerms')?.touched">
+            Debes aceptar los términos y condiciones
+          </div>
+        </div>
+
+        <!-- Botón de registro -->
         <ion-button 
-          fill="clear" 
-          class="password-toggle"
-          (click)="togglePassword()">
-          <ion-icon [name]="showPass ? 'eye-off' : 'eye'" slot="icon-only"></ion-icon>
+          expand="block" 
+          type="submit" 
+          [disabled]="form.invalid || loading"
+          class="register-button">
+          <div class="button-content">
+            <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+            <span *ngIf="!loading">Crear cuenta</span>
+          </div>
         </ion-button>
-      </div>
 
-      <!-- Campo País -->
-      <div class="input-group">
-        <ion-input
-          type="text"
-          placeholder="Country"
-          formControlName="country"
-          fill="outline"
-          class="custom-input">
-        </ion-input>
-      </div>
+        <!-- Divider -->
+        <div class="divider">
+          <span class="divider-text">o continúa con</span>
+        </div>
 
-      <!-- Botón de Continuar -->
-      <ion-button 
-        expand="block" 
-        type="submit" 
-        [disabled]="form.invalid || loading"
-        class="continue-btn">
-        <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
-        <span *ngIf="!loading">Continue</span>
-      </ion-button>
+        <!-- Botones de redes sociales -->
+        <div class="social-register">
+          <ion-button fill="outline" class="social-button google" (click)="registerWithGoogle()">
+            <ion-icon name="logo-google" slot="start"></ion-icon>
+            Google
+          </ion-button>
+          <ion-button fill="outline" class="social-button facebook" (click)="registerWithFacebook()">
+            <ion-icon name="logo-facebook" slot="start"></ion-icon>
+            Facebook
+          </ion-button>
+        </div>
 
-      <!-- Enlace de login -->
-      <div class="login-link">
-        <span>Already have an account? </span>
-        <a routerLink="/login" class="login-text">Sign In</a>
-      </div>
-    </form>
+        <!-- Enlace de login -->
+        <div class="login-link">
+          <div class="login-text">
+            ¿Ya tienes cuenta? 
+            <a routerLink="/login" class="login-link-text">Inicia sesión</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Loading overlay -->
+  <div class="loading-overlay" *ngIf="loading">
+    <div class="loading-content">
+      <ion-spinner name="crescent"></ion-spinner>
+      <div class="loading-text">Creando tu cuenta...</div>
+    </div>
   </div>
 </ion-content>

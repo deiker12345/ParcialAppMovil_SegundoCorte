@@ -38,7 +38,8 @@ export class RegisterPage implements OnInit {
       lastName: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      country: ['', Validators.required]
+      country: ['', Validators.required],
+      acceptTerms: [false, Validators.requiredTrue]
     });
   }
 
@@ -97,5 +98,37 @@ export class RegisterPage implements OnInit {
   private async showMessage(message: string, color: string): Promise<void> {
     const toast = await this.toast.create({ message, duration: 3000, color, position: 'top' });
     await toast.present();
+  }
+
+  async registerWithGoogle(): Promise<void> {
+    try {
+      this.loading = true;
+      await this.showMessage('Función de Google en desarrollo', 'warning');
+      // TODO: Implementar registro con Google
+      // const result = await this.authService.signInWithGoogle();
+      // if (result) {
+      //   this.router.navigate(['/tabs']);
+      // }
+    } catch (error) {
+      await this.showMessage(this.getError(error), 'danger');
+    } finally {
+      this.loading = false;
+    }
+  }
+
+  async registerWithFacebook(): Promise<void> {
+    try {
+      this.loading = true;
+      await this.showMessage('Función de Facebook en desarrollo', 'warning');
+      // TODO: Implementar registro con Facebook
+      // const result = await this.authService.signInWithFacebook();
+      // if (result) {
+      //   this.router.navigate(['/tabs']);
+      // }
+    } catch (error) {
+      await this.showMessage(this.getError(error), 'danger');
+    } finally {
+      this.loading = false;
+    }
   }
 }

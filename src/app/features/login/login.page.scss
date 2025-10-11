@@ -1,5 +1,15 @@
+// Variables de color del welcome
+:root {
+  --welcome-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --welcome-primary: #ff4458;
+  --welcome-white: #ffffff;
+  --welcome-text-light: rgba(255, 255, 255, 0.9);
+  --welcome-overlay: rgba(255, 255, 255, 0.1);
+  --welcome-overlay-strong: rgba(255, 255, 255, 0.2);
+}
+
 .login-content {
-  --background: linear-gradient(135deg, #ff4458 0%, #ff6b7a 100%);
+  --background: var(--welcome-gradient);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,17 +37,17 @@
     
     .flame-icon {
       font-size: 2.5rem;
-      color: white;
-      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+      color: var(--welcome-primary);
+      filter: drop-shadow(0 4px 8px rgba(255, 68, 88, 0.3));
     }
     
     .app-title {
       font-size: 2.5rem;
-      font-weight: 300;
-      color: white;
+      font-weight: 700;
+      color: var(--welcome-white);
       margin: 0;
       letter-spacing: -1px;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
   }
 }
@@ -53,22 +63,28 @@
   position: relative;
   
   .custom-input {
-    --background: white;
-    --color: #333;
-    --placeholder-color: #999;
-    --border-radius: 8px;
+    --background: var(--welcome-overlay);
+    --color: var(--welcome-white);
+    --placeholder-color: var(--welcome-text-light);
+    --border-radius: 25px;
     --border-width: 1px;
-    --border-color: #ddd;
-    --padding-start: 16px;
-    --padding-end: 16px;
+    --border-color: var(--welcome-overlay-strong);
+    --padding-start: 20px;
+    --padding-end: 20px;
     --padding-top: 16px;
     --padding-bottom: 16px;
     font-size: 16px;
     height: 56px;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--welcome-overlay-strong);
+    transition: all 0.3s ease;
     
     &.ion-focused {
-      --border-color: #ff4458;
+      --border-color: var(--welcome-white);
       --border-width: 2px;
+      --background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
   }
   
@@ -77,8 +93,7 @@
     right: 8px;
     top: 50%;
     transform: translateY(-50%);
-    --color: #999;
-    --background: transparent;
+    --color: var(--welcome-text-light);
     --padding-start: 8px;
     --padding-end: 8px;
     z-index: 10;
@@ -90,7 +105,7 @@
   margin-top: -10px;
   
   .forgot-link {
-    color: white;
+    color: var(--welcome-white);
     text-decoration: underline;
     font-size: 14px;
     opacity: 0.9;
@@ -102,37 +117,40 @@
 }
 
 .login-btn {
-  --background: linear-gradient(135deg, #ff9500 0%, #ffb347 100%);
-  --color: white;
+  --background: var(--welcome-primary);
+  --background-hover: #e63946;
+  --color: var(--welcome-white);
   --border-radius: 28px;
   --padding-top: 16px;
   --padding-bottom: 16px;
-  --box-shadow: 0 4px 16px rgba(255, 149, 0, 0.3);
+  --box-shadow: 0 4px 16px rgba(255, 68, 88, 0.4);
   font-size: 16px;
   font-weight: 600;
   text-transform: none;
   margin-top: 20px;
+  transition: all 0.3s ease;
   
   &:hover:not([disabled]) {
-    --box-shadow: 0 6px 20px rgba(255, 149, 0, 0.4);
-    transform: translateY(-1px);
+    --box-shadow: 0 6px 20px rgba(255, 68, 88, 0.5);
+    transform: translateY(-2px);
   }
   
   &[disabled] {
-    --background: #ccc;
-    --color: #999;
+    --background: var(--welcome-overlay);
+    --color: var(--welcome-text-light);
     --box-shadow: none;
+    opacity: 0.6;
   }
 }
 
 .register-link {
   text-align: center;
   margin-top: 30px;
-  color: white;
+  color: var(--welcome-white);
   font-size: 14px;
   
   .register-text {
-    color: white;
+    color: var(--welcome-white);
     text-decoration: underline;
     font-weight: 600;
     
@@ -169,7 +187,6 @@
   
   .login-btn {
     --padding-top: 14px;
-    --padding-bottom: 14px;
     font-size: 14px;
   }
 }
@@ -188,4 +205,725 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+// Variables de color de Tinder
+:root {
+  --tinder-gradient: linear-gradient(135deg, #fd5068 0%, #ff6b7a 100%);
+  --tinder-primary: #fd5068;
+  --tinder-secondary: #ff6b7a;
+  --tinder-white: #ffffff;
+  --tinder-text-light: rgba(255, 255, 255, 0.8);
+  --tinder-button-gradient: linear-gradient(135deg, #ff9500 0%, #ffb347 100%);
+}
+
+.login-content {
+  --background: var(--tinder-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-section {
+  text-align: center;
+  margin-bottom: 80px;
+  
+  .tinder-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    
+    .flame-icon {
+      font-size: 3rem;
+      color: var(--tinder-white);
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    }
+    
+    .app-title {
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--tinder-white);
+      margin: 0;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.input-group {
+  position: relative;
+  
+  .input-label {
+    display: block;
+    color: var(--tinder-white);
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    opacity: 0.9;
+  }
+  
+  .custom-input {
+    --background: transparent;
+    --color: var(--tinder-white);
+    --placeholder-color: var(--tinder-text-light);
+    --border-radius: 0;
+    --border-width: 0 0 2px 0;
+    --border-color: rgba(255, 255, 255, 0.5);
+    --padding-start: 0;
+    --padding-end: 0;
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+    font-size: 16px;
+    height: auto;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+    
+    &.ion-focused {
+      --border-color: var(--tinder-white);
+      border-bottom-color: var(--tinder-white);
+    }
+    
+    &::placeholder {
+      color: var(--tinder-text-light);
+    }
+  }
+  
+  .password-toggle {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    --color: var(--tinder-text-light);
+    --padding-start: 8px;
+    --padding-end: 8px;
+    z-index: 10;
+    margin-top: 12px;
+  }
+}
+
+.forgot-password {
+  text-align: center;
+  margin-top: -8px;
+  
+  .forgot-link {
+    color: var(--tinder-white);
+    text-decoration: underline;
+    font-size: 14px;
+    opacity: 0.8;
+    
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.login-btn {
+  --background: var(--tinder-button-gradient);
+  --color: var(--tinder-white);
+  --border-radius: 25px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  --box-shadow: 0 4px 16px rgba(255, 149, 0, 0.3);
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: none;
+  margin-top: 40px;
+  height: 50px;
+  transition: all 0.3s ease;
+  
+  &:hover:not([disabled]) {
+    --box-shadow: 0 6px 20px rgba(255, 149, 0, 0.4);
+    transform: translateY(-2px);
+  }
+  
+  &[disabled] {
+    --background: rgba(255, 255, 255, 0.2);
+    --color: var(--tinder-text-light);
+    --box-shadow: none;
+    opacity: 0.6;
+  }
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 30px;
+  color: var(--tinder-white);
+  font-size: 14px;
+  
+  .register-text {
+    color: var(--tinder-white);
+    text-decoration: underline;
+    font-weight: 500;
+    
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 480px) {
+  .login-content {
+    padding: 16px;
+  }
+  
+  .logo-section {
+    margin-bottom: 60px;
+    
+    .tinder-logo {
+      .flame-icon {
+        font-size: 2.5rem;
+      }
+      
+      .app-title {
+        font-size: 2.2rem;
+      }
+    }
+  }
+  
+  .input-group .custom-input {
+    font-size: 14px;
+  }
+  
+  .login-btn {
+    --padding-top: 14px;
+    --padding-bottom: 14px;
+    font-size: 14px;
+    height: 46px;
+  }
+}
+
+// Animation for smooth transitions
+.login-container {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Variables profesionales
+:root {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --accent-color: #667eea;
+  --text-primary: #2d3748;
+  --text-secondary: #718096;
+  --white: #ffffff;
+  --background-light: #f7fafc;
+  --background-dark: #1a202c;
+  --border-color: #e2e8f0;
+  --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --shadow-strong: 0 20px 40px rgba(0, 0, 0, 0.15);
+  --success-color: #48bb78;
+  --error-color: #e53e3e;
+}
+
+.login-content {
+  --background: var(--background-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 0;
+  position: relative;
+  background: var(--background-dark);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: var(--primary-gradient);
+    border-radius: 0 0 40px 40px;
+    z-index: 0;
+  }
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  z-index: 1;
+  padding: 0 20px;
+  margin: 0;
+}
+
+.login-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 40px 30px;
+  box-shadow: var(--shadow-strong);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 20px 0;
+}
+
+.logo-section {
+  text-align: center;
+  margin-bottom: 30px;
+  
+  .app-logo {
+    width: 70px;
+    height: 70px;
+    background: var(--primary-gradient);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    box-shadow: var(--shadow-medium);
+    
+    .flame-icon {
+      font-size: 2rem;
+      color: var(--white);
+    }
+  }
+  
+  .app-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 6px 0;
+    letter-spacing: -0.5px;
+  }
+  
+  .page-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0;
+    font-weight: 400;
+  }
+}
+
+.login-form {
+  .form-group {
+    margin-bottom: 20px;
+    position: relative;
+    
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    
+    .form-input {
+      --background: var(--white);
+      --color: var(--text-primary);
+      --placeholder-color: var(--text-secondary);
+      --border-radius: 10px;
+      --border-width: 2px;
+      --border-color: var(--border-color);
+      --padding-start: 14px;
+      --padding-end: 14px;
+      --padding-top: 14px;
+      --padding-bottom: 14px;
+      font-size: 15px;
+      height: 50px;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-light);
+      
+      &.ion-focused {
+        --border-color: var(--accent-color);
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+      
+      &.ion-invalid.ion-touched {
+        --border-color: var(--error-color);
+        box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+      }
+      
+      &.ion-valid.ion-touched {
+        --border-color: var(--success-color);
+        box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.1);
+      }
+    }
+    
+    .password-toggle {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      --color: var(--text-secondary);
+      --padding-start: 8px;
+      --padding-end: 8px;
+      margin-top: 13px;
+      
+      &:hover {
+        --color: var(--accent-color);
+      }
+    }
+    
+    .error-message {
+      color: var(--error-color);
+      font-size: 11px;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+    
+    .success-message {
+      color: var(--success-color);
+      font-size: 11px;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+  }
+  
+  .forgot-password {
+    text-align: right;
+    margin-bottom: 24px;
+    
+    .forgot-link {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        color: #5a67d8;
+        text-decoration: underline;
+      }
+    }
+  }
+  
+  .login-button {
+    --background: var(--primary-gradient);
+    --color: var(--white);
+    --border-radius: 10px;
+    --padding-top: 14px;
+    --padding-bottom: 14px;
+    --box-shadow: var(--shadow-medium);
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: none;
+    height: 50px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    
+    &:hover:not([disabled]) {
+      --box-shadow: var(--shadow-strong);
+      transform: translateY(-2px);
+    }
+    
+    &[disabled] {
+      --background: #cbd5e0;
+      --color: #a0aec0;
+      --box-shadow: none;
+      opacity: 0.7;
+    }
+    
+    .button-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+  }
+  
+  .divider {
+    display: flex;
+    align-items: center;
+    margin: 24px 0;
+    
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-color);
+    }
+    
+    .divider-text {
+      padding: 0 12px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+    }
+  }
+  
+  .social-login {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+    
+    .social-button {
+      --background: var(--white);
+      --color: var(--text-primary);
+      --border-radius: 10px;
+      --border-width: 2px;
+      --border-color: var(--border-color);
+      --padding-top: 10px;
+      --padding-bottom: 10px;
+      --box-shadow: var(--shadow-light);
+      flex: 1;
+      height: 44px;
+      font-weight: 600;
+      font-size: 13px;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        --border-color: var(--accent-color);
+        --box-shadow: var(--shadow-medium);
+        transform: translateY(-1px);
+      }
+      
+      &.google {
+        --color: #db4437;
+      }
+      
+      &.facebook {
+        --color: #4267b2;
+      }
+    }
+  }
+  
+  .register-link {
+    text-align: center;
+    
+    .register-text {
+      color: var(--text-secondary);
+      font-size: 13px;
+      
+      .register-link-text {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          color: #5a67d8;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+// Loading overlay
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(5px);
+  
+  .loading-content {
+    text-align: center;
+    
+    ion-spinner {
+      --color: var(--accent-color);
+      width: 40px;
+      height: 40px;
+      margin-bottom: 16px;
+    }
+    
+    .loading-text {
+      color: var(--text-primary);
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+}
+
+// Responsive design para móvil
+@media (max-width: 480px) {
+  .login-content {
+    padding: 0;
+    min-height: 100vh;
+    
+    &::before {
+      border-radius: 0 0 30px 30px;
+      height: 50%;
+    }
+  }
+  
+  .login-container {
+    padding: 10px;
+    max-width: 100%;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .login-card {
+    padding: 30px 20px;
+    border-radius: 16px;
+    margin: 0;
+    width: 100%;
+    max-width: 350px;
+    min-height: auto;
+  }
+  
+  .logo-section {
+    margin-bottom: 24px;
+    
+    .app-logo {
+      width: 60px;
+      height: 60px;
+      
+      .flame-icon {
+        font-size: 1.8rem;
+      }
+    }
+    
+    .app-title {
+      font-size: 1.6rem;
+    }
+    
+    .page-subtitle {
+      font-size: 0.85rem;
+    }
+  }
+  
+  .login-form {
+    .form-group {
+      margin-bottom: 16px;
+      
+      .form-input {
+        height: 46px;
+        --padding-top: 12px;
+        --padding-bottom: 12px;
+        font-size: 14px;
+      }
+    }
+    
+    .login-button {
+      height: 46px;
+      font-size: 14px;
+    }
+    
+    .social-login .social-button {
+      height: 40px;
+      font-size: 12px;
+    }
+  }
+}
+
+// Para pantallas muy pequeñas
+@media (max-width: 360px) {
+  .login-container {
+    padding: 5px;
+  }
+  
+  .login-card {
+    padding: 25px 15px;
+    border-radius: 12px;
+  }
+  
+  .logo-section {
+    margin-bottom: 20px;
+    
+    .app-logo {
+      width: 50px;
+      height: 50px;
+      
+      .flame-icon {
+        font-size: 1.5rem;
+      }
+    }
+    
+    .app-title {
+      font-size: 1.4rem;
+    }
+  }
+  
+  .login-form {
+    .form-group {
+      margin-bottom: 14px;
+      
+      .form-input {
+        height: 44px;
+        font-size: 13px;
+      }
+    }
+    
+    .login-button {
+      height: 44px;
+      font-size: 13px;
+    }
+  }
+}
+
+// Animations
+.login-container {
+  animation: slideInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Focus states and accessibility
+.form-input:focus-within {
+  outline: none;
+}
+
+.login-button:focus,
+.social-button:focus,
+.forgot-link:focus,
+.register-link-text:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+// Form validation states
+.form-group.has-error .form-input {
+  --border-color: var(--error-color);
+  animation: shake 0.5s ease-in-out;
+}
+
+.form-group.has-success .form-input {
+  --border-color: var(--success-color);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
 }
