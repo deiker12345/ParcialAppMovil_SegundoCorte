@@ -113,7 +113,8 @@ export class ChatPage implements OnInit {
   }
 
   openChat(chat: Chat) {
-    this.router.navigate(['/chat-conversation', chat.id]);
+    // Funcionalidad de chat deshabilitada - solo simulación
+    console.log('Chat seleccionado:', chat.id);
   }
 
   goBack() {

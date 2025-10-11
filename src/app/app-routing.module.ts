@@ -41,11 +41,6 @@ const routes: Routes = [
     canActivate: [AuthGuard, ProfileGuard]
   },
   {
-    path: 'chat-conversation/:chatId',
-    loadChildren: () => import('./features/chat-conversation/chat-conversation.module').then(m => m.ChatConversationPageModule),
-    canActivate: [AuthGuard, ProfileGuard]
-  },
-  {
     path: '**',
     redirectTo: 'welcome'
   }

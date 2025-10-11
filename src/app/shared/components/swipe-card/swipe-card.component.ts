@@ -170,10 +170,32 @@ export class SwipeCardComponent implements OnInit {
     this.completeSwipe('right');
   }
 
-  getAge(birthDate: Date | string | undefined): number {
+  getAge(birthDate: Date | string | undefined | any): number {
     if (!birthDate) return 0;
     
-    const birth = typeof birthDate === 'string' ? new Date(birthDate) : birthDate;
+    let birth: Date;
+    
+    // Manejar diferentes tipos de fecha que pueden venir de Firebase
+    if (typeof birthDate === 'string') {
+      birth = new Date(birthDate);
+    } else if (birthDate instanceof Date) {
+      birth = birthDate;
+    } else if (birthDate && typeof birthDate === 'object' && birthDate.toDate) {
+      // Firebase Timestamp
+      birth = birthDate.toDate();
+    } else if (birthDate && typeof birthDate === 'object' && birthDate.seconds) {
+      // Firebase Timestamp object
+      birth = new Date(birthDate.seconds * 1000);
+    } else {
+      // Intentar convertir cualquier otro formato
+      birth = new Date(birthDate);
+    }
+    
+    // Verificar que la fecha es válida
+    if (isNaN(birth.getTime())) {
+      return 0;
+    }
+    
     const today = new Date();
     let age = today.getFullYear() - birth.getFullYear();
     const monthDiff = today.getMonth() - birth.getMonth();
